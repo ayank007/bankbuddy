@@ -22,14 +22,14 @@ $('.ham').click(function(){
     if(!$('.ham').hasClass('opened')){
         $('.ham').addClass('opened');
         $('.navs').addClass('opened');
-        setTimeout(function(){
-            $('.navs.opened').css('overflow','visible');
-        },400);
+        // setTimeout(function(){
+        //     $('.navs.opened').css('overflow','visible');
+        // },400);
     }
     else{
         $('.ham').removeClass('opened');
         $('.navs').removeClass('opened');
-        $('.navs').css('overflow','hidden');
+        // $('.navs').css('overflow','hidden');
     }
 });
 $('.navs > div > a').click(function(){

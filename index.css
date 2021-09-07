@@ -3,6 +3,7 @@ body{
     margin: 0;
     position: relative;
     padding: 0;
+    overflow-x: hidden;
 }
 ul, li{
     margin: 0;
@@ -16,11 +17,19 @@ a{
 a:hover{
     color: unset;
 }
-section, footer{
+section{
     overflow: hidden;
 }
 .pointer-events-none{
     pointer-events: none;
+}
+body > div{
+    max-width: 1400px;
+    width: max-content;
+    height: auto;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
 }
 /* Blog Blog Blog Blog Blog Blog Blog Blog Blog Blog Blog Blog Blog Blog Blog Blog Blog Blog */
 #Blog{
@@ -48,9 +57,10 @@ section, footer{
     position: relative;
     border-top-left-radius: 6px;
     border-top-right-radius: 6px;
-    width: 100%;
+    width: calc(100% + 2px);
     height: auto;
     max-height: 150px;
+    transform: translate(-1px,-2px);
 }
 .blogCard > .con{
     padding: 4px 10px 10px;
@@ -135,6 +145,7 @@ section, footer{
     display: flex;
     flex-flow: column;
     align-items: center;
+    justify-content: center;
 }
 #Contact > h4{
     font-weight: bolder;
@@ -143,7 +154,6 @@ section, footer{
 }
 .contactForm{
     width: 800px;
-    flex-grow: 1;
     padding: 0 15px;
 }
 .inputs{
@@ -206,10 +216,24 @@ nav{
     width: 100%;
     z-index: 100;
     height: 65px;
-    /* background-color: #002e52; */
+    background-color: #16193f;
+    color: white;
     margin: 0;
     display: flex;
     transition: 0.4s;
+    perspective: 20000px;
+}
+nav::before, nav::after{
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -49vw;
+    height: 65px;
+    background-color: #16193f;
+    width: 50vw;
+}
+nav::after{
+    left: 49vw;
 }
 .logo{
     flex-grow: 1;
@@ -244,23 +268,6 @@ nav{
     .logo a{
         letter-spacing: 1px;
     }
-}
-.navs{
-    z-index: 100;
-    flex-grow: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0 30px;
-    transition: 0.4s;
-    /* background-color: #002e52; */
-}
-.navs > div{
-    display: flex;
-    transition: 0.1s;
-}
-.navs > div:hover{
-    background-color: rgba(255, 255, 255, 0.13);
 }
 .ham{
     display: flex;
@@ -309,17 +316,55 @@ nav{
     transform: rotate(45deg) translate(-4px, -4.5px);
 }
 .navs{
+    z-index: 100;
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 30px;
+    transition: 0.4s;
+    background-color: #16193f;
     flex-flow: column;
     position: absolute;
-    width: 100%;
-    max-height: 0;
+    width: 360px;
+    max-width: 100%;
+    right: 0;
     top: 65px;
-    overflow: hidden;
     align-items: flex-start;
+    padding: 0 30px 15px;
+    transform: rotateX(90deg);
+    transform-origin: top center;
+}
+.navs > div{
+    display: flex;
+    transition: 0.1s;
+}
+.navs > div:hover{
+    background-color: rgba(255, 255, 255, 0.13);
+}
+.navs.opened{
+    transform: rotateX(0deg);
+}
+.navs > div{
+    width: 100%;
+    height: 40px;
+    color: white;
+    position: relative;
+}
+.navs > div > a{
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    text-decoration: none;
+    color: white;
 }
 .contactNavBtn{
     position: absolute;
     height: 65%;
+    z-index: 2;
     top: 50%;
     right: 80px;
     color: white;
@@ -340,10 +385,6 @@ nav{
     align-items: center;
     justify-content: center;
 }
-.navs.opened{
-    max-height: 200px;
-    padding: 0 30px 15px;
-}
 @media screen and (max-width:500px){
     .navs{
         padding: 0 15px;
@@ -358,21 +399,6 @@ nav{
     .contactNavBtn{
         display: none;
     }
-}
-.navs > div{
-    width: 100%;
-    height: 40px;
-    color: white;
-    position: relative;
-}
-.navs > div > a{
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    text-decoration: none;
-    color: white;
 }
 /* chatbot chatbot chatbot chatbot chatbot chatbot chatbot chatbot chatbot chatbot chatbot */
 #Chatbot{
@@ -535,6 +561,17 @@ footer::after{
     z-index: -1;
     left: 0;
 }
+footer::before{
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    z-index: -1;
+    height: calc(100% - 80px);
+    transform: translateX(-50%);
+    background-color: #1A191F;
+    width: 100vw;
+}
 .footerHead{
     display: grid;
     grid-template-columns: 40% 50%;
@@ -546,7 +583,7 @@ footer::after{
     text-transform: capitalize;
 }
 .footerHead h3 span{
-    color: #3A36D4;
+    color: #1c2483;
 }
 .feedback{
     min-width: 320px;
@@ -678,6 +715,10 @@ footer hr{
     background-color: white;
     border: 1px solid rgba(0, 0, 0, 0.274);
     box-shadow: 2px 5px 10px rgba(0, 0, 0, 0.671);
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 .teammate .imgbg img{
     position: absolute;
@@ -688,6 +729,21 @@ footer hr{
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+}
+.teammate .imgbg > div{
+    width: 165px;
+    height: 165px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 50%;
+    border: 1px solid rgba(0, 0, 0, 0.274);
+    background-color: #99e4f6;
+}
+.teammate .imgbg > div > img{
+    width: 100%;
+    border: none;
+    height: auto;
+    transform: translate(-50%,-40%);
 }
 .teammate h5{
     font-size: 25px;
@@ -816,7 +872,7 @@ footer hr{
 }
 .service span{
     position: relative;
-    color: #3A36D4;
+    color: #1c2483;
     font-weight: 700;
     margin-left: 20px;
     cursor: pointer;
@@ -827,7 +883,7 @@ footer hr{
     width: 40px;
     mix-blend-mode: difference;
     height: 40px;
-    background-color: #faff5d;
+    background-color: #fd5e5947;
     top: -10px;
     border-radius: 50%;
     left: -20px;
@@ -858,7 +914,7 @@ header{
     position: absolute;
     width: 250px;
     height: 250px;
-    background-color: #3A36D4;
+    background-color: #1c2483;
     border-radius: 50%;
     z-index: -1;
 }
@@ -961,7 +1017,7 @@ header{
 }
 .calltoactionbtn{
     padding: 10px 35px;
-    background-color: #3A36D4;
+    background-color: #1c2483;
     position: relative;
     width: auto;
     font-weight: 700;
