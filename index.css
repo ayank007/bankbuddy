@@ -31,6 +31,12 @@ body > div{
     left: 50%;
     transform: translateX(-50%);
 }
+.nabvar{
+    background-color: #1A191F;
+}
+.navbar::after, .navbar::before{
+    background-color: #1A191F;
+}
 /* Blog Blog Blog Blog Blog Blog Blog Blog Blog Blog Blog Blog Blog Blog Blog Blog Blog Blog */
 #Blog{
     display: flex;
@@ -1017,7 +1023,7 @@ header{
 }
 .calltoactionbtn{
     padding: 10px 35px;
-    background-color: #1c2483;
+    background-color: #1A191F;
     position: relative;
     width: auto;
     font-weight: 700;
